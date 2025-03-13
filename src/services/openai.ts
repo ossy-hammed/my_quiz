@@ -130,4 +130,15 @@ export const generateQuizFromPdfContent = async (
     console.error('Error generating quiz:', error);
     throw error;
   }
-}; 
+};
+
+interface ApiResponse {
+  choices: Array<{
+    message: {
+      content: string;
+    };
+  }>;
+}
+
+// Replace any with the interface
+const response = await fetch(url, options) as ApiResponse; 

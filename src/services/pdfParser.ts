@@ -7,6 +7,11 @@ if (typeof window !== 'undefined') {
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
 }
 
+interface PdfItem {
+  str: string;
+  [key: string]: unknown;
+}
+
 /**
  * Parse a PDF file and extract its text content
  * @param file The PDF file to parse
@@ -35,7 +40,7 @@ export const parsePdf = async (file: File): Promise<string> => {
       
       // Extract text from the page
       const pageText = textContent.items
-        .map((item: any) => item.str)
+        .map((item: PdfItem) => item.str)
         .join(' ');
       
       fullText += `Page ${i}:\n${pageText}\n\n`;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaCheck, FaTimes, FaRedo, FaHome, FaChevronDown, FaChevronUp, FaDownload, FaShare, FaTrophy } from 'react-icons/fa';
 import { useQuiz } from '@/context/QuizContext';
@@ -7,6 +7,21 @@ import confetti from 'canvas-confetti';
 const QuizResults: React.FC = () => {
   const { quizResults, setCurrentStep, resetQuiz } = useQuiz();
   const [expandedQuestions, setExpandedQuestions] = useState<string[]>([]);
+  const [score, setScore] = useState<number>(0);
+  const [correctAnswers, setCorrectAnswers] = useState<number>(0);
+  const [totalQuestions, setTotalQuestions] = useState<number>(0);
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [answers, setAnswers] = useState<Answer[]>([]);
+
+  useEffect(() => {
+    if (quizResults) {
+      setScore(quizResults.score);
+      setCorrectAnswers(quizResults.correctAnswers);
+      setTotalQuestions(quizResults.totalQuestions);
+      setQuestions(quizResults.questions);
+      setAnswers(quizResults.answers);
+    }
+  }, [quizResults]);
 
   if (!quizResults) {
     return (
@@ -22,10 +37,8 @@ const QuizResults: React.FC = () => {
     );
   }
 
-  const { score, correctAnswers, totalQuestions, answers, questions } = quizResults;
-
   // Trigger confetti if score is above 70%
-  React.useEffect(() => {
+  useEffect(() => {
     if (score >= 70) {
       const duration = 3 * 1000;
       const animationEnd = Date.now() + duration;
@@ -64,12 +77,6 @@ const QuizResults: React.FC = () => {
         ? prev.filter(id => id !== questionId)
         : [...prev, questionId]
     );
-  };
-
-  const getScoreColor = () => {
-    if (score >= 80) return 'text-green-500';
-    if (score >= 60) return 'text-yellow-500';
-    return 'text-red-500';
   };
 
   const getScoreMessage = () => {

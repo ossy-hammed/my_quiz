@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaArrowLeft, FaArrowRight, FaCheck, FaTimes, FaSpinner, FaRedo, FaFlag } from 'react-icons/fa';
+import { FaArrowLeft, FaArrowRight, FaCheck, FaTimes, FaSpinner, FaRedo, FaFlag, FaPause, FaPlay } from 'react-icons/fa';
 import { useQuiz } from '@/context/QuizContext';
 import toast from 'react-hot-toast';
 
@@ -35,7 +35,7 @@ const Quiz: React.FC = () => {
     } else if (timeLeft === 0 && !isPaused) {
       handleNextQuestion();
     }
-  }, [timeLeft, isPaused]);
+  }, [timeLeft, isPaused, handleNextQuestion]);
 
   const handleAnswerSelect = (answer: string) => {
     setSelectedAnswer(answer);
