@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaCheck, FaTimes, FaRedo, FaHome, FaChevronDown, FaChevronUp, FaDownload, FaShare, FaTrophy } from 'react-icons/fa';
+import { FaCheck, FaTimes, FaChevronDown, FaDownload, FaRedo, FaArrowLeft, FaTrophy } from 'react-icons/fa';
 import { useQuiz } from '@/context/QuizContext';
 import confetti from 'canvas-confetti';
 
@@ -196,7 +196,7 @@ const QuizResults: React.FC = () => {
             onClick={handleNewQuiz} 
             className="btn-primary flex items-center"
           >
-            <FaHome className="mr-2" /> New Quiz
+            <FaArrowLeft className="mr-2" /> New Quiz
           </button>
           <button 
             onClick={handleDownloadResults} 

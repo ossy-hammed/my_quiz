@@ -12,6 +12,11 @@ interface PdfItem {
   [key: string]: unknown;
 }
 
+interface PdfTextItem {
+  str: string;
+  [key: string]: unknown;
+}
+
 /**
  * Parse a PDF file and extract its text content
  * @param file The PDF file to parse
@@ -40,7 +45,7 @@ export const parsePdf = async (file: File): Promise<string> => {
       
       // Extract text from the page
       const pageText = textContent.items
-        .map((item: PdfItem) => item.str)
+        .map((item: PdfTextItem) => item.str)
         .join(' ');
       
       fullText += `Page ${i}:\n${pageText}\n\n`;

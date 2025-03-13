@@ -140,5 +140,5 @@ interface ApiResponse {
   }>;
 }
 
-// Replace any with the interface
+// Replace any with proper type
 const response = await fetch(url, options) as ApiResponse; 
